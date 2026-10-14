@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The struggles and triumphs of life</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        ul.bucket-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .bucket-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px #ccc;
+
+        }
+
+        .bucket-item:hover {
+            box-shadow: 4px 4px 10px #bbb;
+            transition: box-shadow 0.3s ease;
+
+
+        }
+
+        .attempts-list {
+            display: none;
+            margin-top: 10px;
+            border-top: 1px dashed #ccc;
+            padding-top: 7px;
+
+        }
+
+
+        .attempts-list ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+
+        /* A special class we will use JavaScript to add, which makes hidden things visible */
+        .show {
+            display: block;
+        }
+
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .fail {
+            color: red;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            margin-bottom: 20px;
+            color: #33445d;
+        }
+
+        strong {
+            color: #33445d;
+            font-family: Arial, sans-serif;
+        }
+
+        .journey {
+            color: #33445d;
+            font-style: italic;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        /* --- NEW STYLES FOR IMAGE OVERLAY --- */
+
+        /* The container that holds both the image and the overlay */
+        .image-container {
+            /* 'relative' is crucial! It tells the absolute overlay inside to stay within this box */
+            position: relative;
+            /* Make it take up the full width of the bucket-item */
+            width: 100%;
+            /* Set a fixed height for consistency */
+            height: 150px;
+            /* Round the corners to match your theme */
+            border-radius: 6px;
+            /* Hides any part of the image that spills outside the rounded corners */
+            overflow: hidden;
+            /* Adds space between the image and your text below */
+            margin-bottom: 15px;
+        }
+
+        /* Styles the actual image */
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            /* 'object-fit: cover' acts like a background image, cropping it nicely without squishing */
+            object-fit: contain;
+            /* Removes weird spacing that browsers add under images by default */
+            display: block;
+        }
+
+        /* The overlay box that sits on top */
+        .overlay {
+            /* 'absolute' pulls this out of the normal layout and places it exactly where we tell it */
+            position: absolute;
+            /* Pin it to the top-left of the .image-container */
+            top: 0;
+            left: 0;
+            /* Make it cover the whole container */
+            width: 100%;
+            height: 100%;
+            /* A black background with 60% opacity (transparency) */
+            background-color: rgba(0, 0, 0, 0.6);
+            /* White text color */
+            color: white;
+            /* Flexbox is the easiest way to center text perfectly in the middle */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+
+            /* Start it as invisible (0) */
+            opacity: 0;
+            /* Tell it to smoothly animate over 0.3 seconds when opacity changes */
+            transition: opacity 0.3s ease;
+        }
+
+        /* When the user hovers over the image-container, change the overlay's opacity to 1 (visible) */
+        .image-container:hover .overlay {
+            opacity: 1;
+        }
+
+        .image-container.smart-parking {
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <h1>My Bucket List & Life Journal</h1>
+    <h3>Documenting my <strong class="journey">journey</strong>, <s class="fail">failures</s>, and <b
+            class="success">successes.</b>
+    </h3>
+
+    <ul class="bucket-list">
+
+        <li class="bucket-item" onclick="toggleAttempts('crypto-attempts')">
+            <div class="image-container">
+                <img src="./10x_roi/img/coinbase_logo.jpg" alt="Coinbase Logo">
+                <div class="overlay">
+                    View My Attempts
+                </div>
+            </div>
+
+            <strong style="color: rgb(48, 171, 107); font-family: domino">Make a 10x ROI by investing in crypto</strong>
+            <span style="font-size: 12px; color: gray;">(Click to view attempts)</span>
+            <div id="crypto-attempts" class="attempts-list">
+                <ul>
+                    <li>
+                        <a href="./10x_roi/crypto_attmpt_1.html">
+                            Can I actually turn £500 to £5000?
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="bucket-item" onclick="toggleAttempts('smart-parking-attempts')">
+            <div class="image-container smart-parking">
+                <img src="./smart_parking/smart_parking_logo.jpg" alt="Smart Parking">
+                <div class="overlay">
+                    View My Attempts
+                </div>
+            </div>
+
+            <strong style="color: rgb(232, 85, 22); font-family: domino">Fight my way out of a smart parking
+                fine</strong>
+            <span style="font-size: 12px; color: gray;">(Click to view attempts)</span>
+            <div id="smart-parking-attempts" class="attempts-list">
+                <ul>
+                    <li>
+                        <a href="./smart_parking/smart_parking_attmpt_1.html">
+                            No way I'm paying this fine!
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+    </ul>
+
+    <!-- The script tag is where JavaScript goes. This adds interactivity to the page. -->
+    <script>
+        // We are creating a function called toggleAttempts. 
+        // It expects to be given an 'id' (a specific name of an element) when called.
+        function toggleAttempts(id) {
+
+            // We tell the document (the webpage) to find the element that has the ID we passed in.
+            // We store this element in a variable named 'attemptsDiv'
+            var attemptsDiv = document.getElementById(id);
+
+            // We check if the element's current classes contain the word "show"
+            if (attemptsDiv.classList.contains("show")) {
+                // If it does have "show", we remove it. This hides the element again.
+                attemptsDiv.classList.remove("show");
+            } else {
+                // If it doesn't have "show", we add it. This makes the element visible.
+                attemptsDiv.classList.add("show");
+            }
+        }
+    </script>
+
+</body>
+
+</html>
